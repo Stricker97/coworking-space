@@ -1,16 +1,11 @@
 package ch.zli.m223.controller;
 
-import java.util.List;
-
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
 import javax.ws.rs.PATCH;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -23,68 +18,29 @@ import ch.zli.m223.model.ApplicationUser;
 import ch.zli.m223.service.ApplicationUserService;
 
 
-@Path("/users")
-@Tag(name = "Users", description = "Handling of users")
-@RolesAllowed({ "Admin" })
+@Path("/registration")
+@Tag(name = "User", description = "Handling of user")
+@RolesAllowed({ "User" })
 public class ApplicationUserController {
   
   @Inject
   ApplicationUserService userService;
-
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  @Operation(
-      summary = "Index all users.", 
-      description = "Returns a list of all users."
-  )
-  public List<ApplicationUser> index() {
-      return userService.findAll();
-  }
 
   @POST
   @Produces(MediaType.APPLICATION_JSON)
   @Consumes(MediaType.APPLICATION_JSON)
   @Operation(
       summary = "Creates a new user. Also known as registration.", 
-      description = "Creates a new user and returns the newly added user."
+      description = "Creates a new user if the reentered password matches the first one."
   )
   @PermitAll
-  @RolesAllowed({ "User", "Admin" })
-  public ApplicationUser create(ApplicationUser user) {
-     return userService.createUser(user);
+  public void create(ApplicationUser applicationUser) {
+    if(applicationUser.getPassword().equals(applicationUser.getReenteredPassword())) {
+        userService.createUser(applicationUser);
+    }
   }
 
-  @Path("/{id}")
-  @GET
-  @Operation(
-      summary = "Reads an user.",
-      description = "Reads an user by its id."
-  )
-  public void read(@PathParam("id") Long id) {
-      userService.readUser(id);
-  }
-
-  @Path("/{id}")
-  @DELETE
-  @Operation(
-      summary = "Deletes an user.",
-      description = "Deletes an user by its id."
-  )
-  public void delete(@PathParam("id") Long id) {
-      userService.deleteUser(id);
-  }
-
-  @Path("/{id}")
-  @PUT
-  @Operation(
-      summary = "Updates an user.",
-      description = "Updates an user by its id."
-  )
-  public ApplicationUser update(@PathParam("id") Long id, ApplicationUser user) {
-      return userService.updateUser(id, user);
-  }
-
-  @Path("/{id}")
+  @Path("/changePassword/{id}")
   @PATCH
   @Operation(
       summary = "Updates the password of the user.",

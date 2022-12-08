@@ -21,6 +21,11 @@ public class ApplicationUserService {
     }
 
     @Transactional
+    public String dontCreateUser(){
+        return "Passwords dont match";
+    } 
+
+    @Transactional
     public ApplicationUser readUser(Long id) {
         var entity = entityManager.find(ApplicationUser.class, id);
         return entity;

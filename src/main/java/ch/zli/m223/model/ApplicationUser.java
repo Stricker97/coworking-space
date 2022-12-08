@@ -31,6 +31,8 @@ public class ApplicationUser {
   @Column(nullable = false)
   private String password;
 
+  private String reenteredPassword;
+
   @Column(nullable = false)
   private Boolean isAdmin;
 
@@ -75,6 +77,14 @@ public class ApplicationUser {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public String getReenteredPassword() {
+    return reenteredPassword;
+  }
+
+  public void setReenteredPassword(String reenteredPassword){
+    this.reenteredPassword = reenteredPassword;
   }
 
   public Boolean getIsAdmin() {

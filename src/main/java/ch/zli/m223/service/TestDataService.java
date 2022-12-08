@@ -29,6 +29,7 @@ public class TestDataService {
         raphe.setLastname("Stricker");
         raphe.setEmail("raphael.stricker@gmail.com");
         raphe.setPassword("1234");
+        raphe.setReenteredPassword("1234");
         raphe.setIsAdmin(true);
 
         var rem = new ApplicationUser();
@@ -36,6 +37,7 @@ public class TestDataService {
         rem.setLastname("Mueller");
         rem.setEmail("nicolas.mueller@lernende.bww.ch");
         rem.setPassword("12345");
+        rem.setReenteredPassword("12345");
         rem.setIsAdmin(false);
 
         var mark = new ApplicationUser();
@@ -43,6 +45,7 @@ public class TestDataService {
         mark.setLastname("Markstaller");
         mark.setEmail("cedric.markstaller@lernende.bww.ch");
         mark.setPassword("123456");
+        mark.setReenteredPassword("12345");
         mark.setIsAdmin(false);
         
         //Bookings
