@@ -21,6 +21,12 @@ public class ApplicationUserService {
     }
 
     @Transactional
+    public ApplicationUser readUser(Long id) {
+        var entity = entityManager.find(ApplicationUser.class, id);
+        return entity;
+    }
+
+    @Transactional
     public void deleteUser(Long id) {
         var entity = entityManager.find(ApplicationUser.class, id);
         entityManager.remove(entity);
@@ -30,6 +36,13 @@ public class ApplicationUserService {
     public ApplicationUser updateUser(Long id, ApplicationUser user) {
         user.setId(id);
         return entityManager.merge(user);
+    }
+
+    @Transactional
+    public ApplicationUser updatePassword(Long id, String newPassword) {
+        var entity = entityManager.find(ApplicationUser.class, id);
+        entity.setPassword(newPassword);
+        return entityManager.merge(entity);
     }
 
     public List<ApplicationUser> findAll() {

@@ -49,13 +49,16 @@ public class TestDataService {
         var booking1 = new Booking();
         booking1.setDate(LocalDate.parse("'2022-12-07'"));
         booking1.setBookingTime(BookingTime.MORNING);
+        booking1.setIsAccepted(true);
 
         var booking2 = new Booking();
         booking2.setDate(LocalDate.parse("'2022-12-08'"));
         booking2.setBookingTime(BookingTime.AFTERNOON);
+        booking2.setIsAccepted(true);
 
         var booking3 = new Booking();
         booking3.setDate(LocalDate.parse("'2022-12-08'"));
         booking3.setBookingTime(BookingTime.FULLDAY);
+        booking3.setIsAccepted(false);
     }
 }

@@ -50,3 +50,10 @@ If you want to learn more about building native executables, please consult http
 ## Loading the testdata
 
 The testdata is defined in ch.zli.m223.service.TestDataService.java and will be loaded automatically by the start of the application
+
+## Changes
+
+As one of functional extended requirements I planned the following:
+*As Member I want to be able to update my login data after registering so that I can apply any changes to my account*
+
+While programming though, I considered it more sensible to make the member only able to update his password istead of all credentials like firstname, lastname etc.

@@ -26,6 +26,17 @@ public class Booking {
     @Enumerated(EnumType.STRING)
     private BookingTime bookingTime;
 
+    @Column(nullable = false)
+    private Boolean isAccepted;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public LocalDate getDate (){
         return date;
     }
@@ -40,5 +51,13 @@ public class Booking {
 
     public void setBookingTime(BookingTime bookingTime) {
         this.bookingTime = bookingTime;
+    }
+
+    public Boolean getIsAccepted() {
+        return isAccepted;
+    }
+
+    public void setIsAccepted(Boolean isAccepted) {
+        this.isAccepted = isAccepted;
     }
 }

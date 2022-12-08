@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.PATCH;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -24,7 +25,7 @@ import ch.zli.m223.service.ApplicationUserService;
 
 @Path("/users")
 @Tag(name = "Users", description = "Handling of users")
-@RolesAllowed({ "User", "Admin" })
+@RolesAllowed({ "Admin" })
 public class ApplicationUserController {
   
   @Inject
@@ -48,6 +49,7 @@ public class ApplicationUserController {
       description = "Creates a new user and returns the newly added user."
   )
   @PermitAll
+  @RolesAllowed({ "User", "Admin" })
   public ApplicationUser create(ApplicationUser user) {
      return userService.createUser(user);
   }
@@ -80,5 +82,15 @@ public class ApplicationUserController {
   )
   public ApplicationUser update(@PathParam("id") Long id, ApplicationUser user) {
       return userService.updateUser(id, user);
+  }
+
+  @Path("/{id}")
+  @PATCH
+  @Operation(
+      summary = "Updates the password of the user.",
+      description = "Updates the password by the id of its user."
+  )
+  public ApplicationUser updatePassword(@PathParam("id") Long id, String newPassword) {
+      return userService.updatePassword(id, newPassword);
   }
 }
